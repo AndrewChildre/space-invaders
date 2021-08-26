@@ -1,3 +1,53 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>kaboom</title>
+  <meta charset="utf-8">
+  <style>
+    * {
+      margin: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+<script src="https://kaboomjs.com/lib/0.5.0/kaboom.js"></script>
+<script src="https://kaboomjs.com/lib/0.5.0/plugins/aseprite.js"></script>
+<script src="https://kaboomjs.com/lib/0.5.0/plugins/pedit.js"></script>
+<script src="https://kaboomjs.com/pub/legacy/kbmsprite.js"></script>
+
+  <script>
+
+kaboom({
+  ...{"fullscreen":true,"width":240,"height":240,"scale":1,"startScene":"main","version":"0.5.0","clearColor":[0.0196078431372549,0,0,1]},
+  global: true,
+  plugins: [ peditPlugin, asepritePlugin, kbmspritePlugin ],
+});
+loadKbmsprite("space-invader", "sprites/space-invader.kbmsprite");
+loadKbmsprite("space-ship", "sprites/space-ship.kbmsprite");
+loadKbmsprite("wall", "sprites/wall.kbmsprite");
+scene("lose", (args = {}) => {
+add([
+  
+  text(args.score),
+  origin('center'),
+  scale(10),
+  pos(width()/2, height()/2)
+])
+});
+scene("main", (args = {}) => {
 const moveSpeed = 200
 const invaderSpeed = 100
 let currentSpeed = invaderSpeed
@@ -131,3 +181,11 @@ action('space-invader', (s) => {
   }
 })
 
+
+});
+start("main");
+
+  </script>
+</body>
+
+</html>
